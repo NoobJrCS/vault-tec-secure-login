@@ -1,16 +1,13 @@
 # run.py
+from app import create_app, db   # <--- MODIFIED
+from app.models import User     # <--- ADD THIS LINE
 
-from flask import Flask, render_template
+app = create_app()
 
-# Basic App Initialization
-app = Flask(__name__, template_folder='app/templates', static_folder='app/static')
+# ADD THIS FUNCTION vvvv
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': User}
 
-# A temporary route to display the registration page
-@app.route('/')
-def register():
-    """Renders the registration page."""
-    return render_template('register.html')
-
-# This is required to run the app
 if __name__ == '__main__':
     app.run(debug=True)
