@@ -74,3 +74,28 @@ a {
 a:hover {
     text-decoration: underline;
 }
+/* app/static/style.css */
+
+/* ... all your previous CSS ... */
+
+/* Flashed Messages Styling */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-success {
+    color: #d1e7dd; /* Light green text */
+    background-color: #0f5132; /* Dark green background */
+    border-color: #198754; /* Medium green border */
+}
+
+.alert-warning {
+    color: #fff3cd; /* Light yellow text */
+    background-color: #664d03; /* Dark yellow background */
+    border-color: #ffc107; /* Medium yellow border */
+}

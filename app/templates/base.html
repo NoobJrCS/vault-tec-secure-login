@@ -10,9 +10,21 @@
     <header>
         <h1>Vault-Tec Secure Login System</h1>
     </header>
+
     <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
         {% block content %}{% endblock %}
     </main>
+
     <footer>
         <p>&copy; 2025 Vault-Tec Security</p>
     </footer>
