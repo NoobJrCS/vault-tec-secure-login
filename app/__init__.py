@@ -1,24 +1,26 @@
-# app/__init__.py
-
+# app/__init__.py (Final Version)
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from project_config import Config
 
-# Create the database extension instance, but don't attach it to an app yet
 db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.login_view = 'auth_bp.login'
 
 def create_app(config_class=Config):
-    """
-    Creates and configures the Flask application.
-    This is the App Factory.
-    """
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    # Initialize the database with the app
     db.init_app(app)
+    login_manager.init_app(app)
 
-    # Import and register blueprints INSIDE the factory function
+    # ADD THIS USER LOADER vvvv
+    from .models import User
+    @login_manager.user_loader
+    def load_user(user_id):
+        return db.session.get(User, int(user_id))
+
     with app.app_context():
         from .auth import routes as auth_routes
         app.register_blueprint(auth_routes.auth_bp)

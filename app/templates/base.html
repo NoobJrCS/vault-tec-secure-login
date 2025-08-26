@@ -9,6 +9,15 @@
 <body>
     <header>
         <h1>Vault-Tec Secure Login System</h1>
+        <nav>
+        {% if current_user.is_authenticated %}
+            <span>Hello, {{ current_user.username }}!</span>
+            <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth_bp.login') }}">Login</a>
+            <a href="{{ url_for('auth_bp.register') }}">Register</a>
+        {% endif %}
+        </nav>
     </header>
 
     <main>

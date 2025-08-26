@@ -99,3 +99,33 @@ a:hover {
     background-color: #664d03; /* Dark yellow background */
     border-color: #ffc107; /* Medium yellow border */
 }
+
+/* Navigation Bar Styling */
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+}
+
+nav span {
+    color: #cfcfcf;
+}
+
+nav a {
+    color: #03dac6;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+nav a:hover {
+    background-color: #03dac6;
+    color: #121212;
+    text-decoration: none;
+}
