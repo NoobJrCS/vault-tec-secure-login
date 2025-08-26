@@ -5,6 +5,7 @@ from flask_login import login_user, logout_user, login_required
 from argon2 import PasswordHasher
 from app.models import User
 from app import db
+from .decorators import admin_required
 
 # Create a Blueprint for authentication routes
 auth_bp = Blueprint('auth_bp', __name__)
@@ -94,3 +95,17 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('auth_bp.login'))
+
+@auth_bp.route('/admin-dashboard')
+@login_required
+@admin_required
+def admin_dashboard():
+    """Displays a list of all users for admins."""
+    try:
+        # Query the database to get all users
+        users = User.query.all()
+    except Exception as e:
+        flash('Could not retrieve users from the database.', 'danger')
+        users = []
+
+    return render_template('admin_dashboard.html', users=users)
