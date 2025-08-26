@@ -156,3 +156,9 @@ th {
 tbody tr:hover {
     background-color: #2a2a2a;
 }
+
+.alert-danger {
+    color: #f8d7da; /* Light red text */
+    background-color: #842029; /* Dark red background */
+    border-color: #b02a37; /* Medium red border */
+}

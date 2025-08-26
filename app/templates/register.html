@@ -2,29 +2,41 @@
 
 {% block content %}
     <h2>Register New User</h2>
-    <form action="/register" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    
+    <form method="POST" action="">
+        {{ form.csrf_token }} <div>
+            {{ form.username.label }}
+            {{ form.username() }}
+            {% for error in form.username.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            {{ form.email.label }}
+            {{ form.email() }}
+            {% for error in form.email.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            {{ form.password.label }}
+            {{ form.password() }}
+            {% for error in form.password.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <label for="role">Role:</label>
-            <select id="role" name="role">
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-            </select>
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password() }}
+            {% for error in form.confirm_password.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <button type="submit">Register</button>
+            {{ form.recaptcha }} </div>
+        <div>
+            {{ form.submit() }}
         </div>
     </form>
-    <p>Already have an account? <a href="/login">Login here</a></p>
+    <p>Already have an account? <a href="{{ url_for('auth_bp.login') }}">Login here</a></p>
 {% endblock %}

@@ -3,6 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from project_config import Config
+from flask_migrate import Migrate 
+
+migrate = Migrate()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -14,6 +17,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app, db)
 
     # ADD THIS USER LOADER vvvv
     from .models import User

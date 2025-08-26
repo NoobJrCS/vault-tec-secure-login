@@ -2,18 +2,26 @@
 
 {% block content %}
     <h2>User Login</h2>
-    <form action="/login" method="post">
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <form method="POST" action="">
+        {{ form.csrf_token }} <div>
+            {{ form.email.label }}
+            {{ form.email() }}
+            {% for error in form.email.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            {{ form.password.label }}
+            {{ form.password() }}
+            {% for error in form.password.errors %}
+                <span style="color: #ff6961;">{{ error }}</span>
+            {% endfor %}
         </div>
         <div>
-            <button type="submit">Login</button>
+            {{ form.recaptcha }} </div>
+        <div>
+            {{ form.submit() }}
         </div>
     </form>
-    <p>Don't have an account? <a href="/register">Register here</a></p>
+    <p>Don't have an account? <a href="{{ url_for('auth_bp.register') }}">Register here</a></p>
 {% endblock %}
