@@ -96,10 +96,10 @@ To run this project locally, follow these steps:
 ![Admin Dashboard](screenshots/admin_dashboard.png)
 
 ### Incorrect Details
-![Incorrect Details] (Screenshots/incorrect_details.png)
+![Incorrect Details] (screenshots/incorrect_details.png)
 
 ### Account Locker
-![Account Locked] (Screenshots/account_locked.png)
+![Account Locked] (screenshots/account_locked.png)
 
 
 ## 🧠 Challenges and Solutions
