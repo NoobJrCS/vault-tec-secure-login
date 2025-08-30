@@ -5,10 +5,6 @@ from flask import flash, redirect, url_for
 from flask_login import current_user
 
 def admin_required(f):
-    """
-    A custom decorator to ensure the user is an admin.
-    If they are not, it flashes an error and redirects them.
-    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
         # Check if user is authenticated and has the 'Admin' role

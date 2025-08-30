@@ -6,7 +6,6 @@ from datetime import datetime
 
 ph = PasswordHasher()
 
-# The User class now inherits from UserMixin
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 

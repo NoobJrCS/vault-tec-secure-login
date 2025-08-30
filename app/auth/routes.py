@@ -61,23 +61,15 @@ def register():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    """Handles user login with account lockout logic."""
     form = LoginForm()
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
-
         user = User.query.filter_by(email=email).first()
-
-        # Check if the account is currently locked
         if user and user.locked_until and user.locked_until > datetime.utcnow():
             flash(f"Your account is locked. Please try again after {user.locked_until.strftime('%Y-%m-%d %H:%M:%S')} UTC.", 'danger')
             return redirect(url_for('auth_bp.login'))
-
-        # Check if user exists and password is correct
         if user and user.check_password(password):
-            # --- Successful Login ---
-            # Reset failed attempts and unlock account on successful login
             user.failed_login_attempts = 0
             user.locked_until = None
             db.session.commit()
@@ -86,11 +78,10 @@ def login():
             flash('Logged in successfully!', 'success')
             return redirect(url_for('auth_bp.dashboard'))
         else:
-            # --- Failed Login ---
             if user:
                 user.failed_login_attempts += 1
-                if user.failed_login_attempts >= 5: # Lock after 5 failed attempts
-                    user.locked_until = datetime.utcnow() + timedelta(minutes=15) # Lock for 15 minutes
+                if user.failed_login_attempts >= 5:
+                    user.locked_until = datetime.utcnow() + timedelta(minutes=15) 
                     flash('Your account has been locked for 15 minutes due to too many failed login attempts.', 'danger')
                 db.session.commit()
             
