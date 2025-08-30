@@ -33,7 +33,13 @@
             {% endfor %}
         </div>
         <div>
-            {{ form.recaptcha }} </div>
+            {{ form.role.label }}
+            {{ form.role() }}
+        </div>
+
+        <div>
+            {{ form.recaptcha }} 
+        </div>
         <div>
             {{ form.submit() }}
         </div>

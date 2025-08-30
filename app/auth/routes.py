@@ -29,7 +29,8 @@ def register():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        
+        role = form.role.data
+
         # --- Validation for existing user ---
         user_by_email = User.query.filter_by(email=email).first()
         if user_by_email:
@@ -47,7 +48,7 @@ def register():
             username=username,
             email=email,
             password_hash=password_hash,
-            role='User'  # Default role for registration
+            role=role
         )
         db.session.add(new_user)
         db.session.commit()

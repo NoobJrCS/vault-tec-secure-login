@@ -1,7 +1,7 @@
 # app/auth/forms.py
 
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField 
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 class RegistrationForm(FlaskForm):
@@ -21,6 +21,12 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField(
         'Confirm Password',
         validators=[DataRequired(), EqualTo('password')]
+    )
+    # ADD THE ROLE FIELD vvvv
+    role = SelectField(
+        'Role',
+        choices=[('User', 'User'), ('Admin', 'Admin')],
+        validators=[DataRequired()]
     )
     recaptcha = RecaptchaField()
     submit = SubmitField('Register')
